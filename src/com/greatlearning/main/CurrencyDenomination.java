@@ -23,9 +23,9 @@ public class CurrencyDenomination {
 		MergeSort mergesort = new MergeSort();
 		mergesort.sort(currencyDemonition, 0, size - 1);
 
+		
 		int noOfNotes[] = new int[size];
-
-		notesCounter(size, currencyDemonition, ammount, noOfNotes);
+		noOfNotes=notesCounter(size, currencyDemonition, ammount);
 		printNotesRquired(size, currencyDemonition, noOfNotes);
 	}
 
@@ -42,14 +42,19 @@ public class CurrencyDenomination {
 		}
 	}
 
-	private static void notesCounter(int size, int[] currencyDemonition, int ammount, int[] noOfNotes) {
+	private static int[] notesCounter(int size, int[] currencyDemonition, int ammount) {
 		/**
 		 * Getting count of the value from end of the Notes
 		 */
-
+		int noOfNotes[] = new int[size];
 		for (int index = 0; index < size; index++) {
 			noOfNotes[index] = ammount / currencyDemonition[index];
 			ammount %= currencyDemonition[index];
 		}
+		if(ammount>0) {
+			System.out.println("The target ammount is not reachable");
+			return new int[size];
+		}else 
+			return noOfNotes;
 	}
 }
